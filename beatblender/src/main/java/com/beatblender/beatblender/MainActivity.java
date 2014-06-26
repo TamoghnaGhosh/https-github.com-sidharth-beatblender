@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
-    private TextView textView;
+    TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,16 +18,13 @@ public class MainActivity extends Activity {
         textView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                textView.setText(Long.toString(System.currentTimeMillis()));
+                textView.setText("Time : "+Long.toString(System.currentTimeMillis()));
                 return true;
             }
         });
-
         TextView sr1;
         TextView tv3;
         TextView tv4;
-        //dispTime();
-
 
     }
 
@@ -52,22 +49,4 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void dispTime()
-    {   long last, count = 0,current;
-        last  = System.currentTimeMillis();
-        while(count <= 5)
-        {
-            current = System.currentTimeMillis();
-            if(current - last >= 5)
-            {
-                textView.setText(Long.toString(current) +" count : "+Long.toString(count));
-                count++;
-            }
-        }
-    }
-
-
-
-
 }
-
