@@ -4,18 +4,30 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
-
+    private TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TextView textView;
+        textView = (TextView) findViewById(R.id.TimeDisplay);
+        textView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                textView.setText(Long.toString(System.currentTimeMillis()));
+                return true;
+            }
+        });
+
         TextView sr1;
         TextView tv3;
         TextView tv4;
+        //dispTime();
+
 
     }
 
@@ -40,4 +52,22 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void dispTime()
+    {   long last, count = 0,current;
+        last  = System.currentTimeMillis();
+        while(count <= 5)
+        {
+            current = System.currentTimeMillis();
+            if(current - last >= 5)
+            {
+                textView.setText(Long.toString(current) +" count : "+Long.toString(count));
+                count++;
+            }
+        }
+    }
+
+
+
+
 }
+
