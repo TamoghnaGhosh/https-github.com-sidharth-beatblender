@@ -2,6 +2,7 @@ package com.beatblender.beatblender;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -13,10 +14,22 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TextView textView;
-        TextView sr1;
+        final TextView sr1 = (TextView)findViewById(R.id.textView);
         TextView tv3;
         TextView tv4;
 
+        CountDownTimer cd = new CountDownTimer(100000,10) {
+            @Override
+            public void onTick(long l) {
+                sr1.setText(String.valueOf(System.currentTimeMillis()));
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        };
+        cd.start();
     }
 
 
