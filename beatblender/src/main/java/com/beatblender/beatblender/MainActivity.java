@@ -2,6 +2,9 @@ package com.beatblender.beatblender;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.res.AssetFileDescriptor;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,6 +24,8 @@ public class MainActivity extends Activity {
     private int touchCount;
     private float coordinateX, coordinateY;
     private RelativeLayout relativeLayout;
+    private SoundPool soundPool;
+    private int soundId[];
     Timer timer  = new Timer("Highlight after 5");
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -32,7 +37,9 @@ public class MainActivity extends Activity {
         touchCount = 0;
         relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
         textView = (TextView) findViewById(R.id.TimeDisplay);
-
+        soundId = new int[1];
+        soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC,0);
+        soundId[0] = soundPool.load(MainActivity.this,R.raw.snare1,1);
 
 //        textView.setOnTouchListener(new View.OnTouchListener() {
 //            @Override
@@ -116,6 +123,7 @@ public class MainActivity extends Activity {
                     public void run() {
 
                         relativeLayout.addView(addView);
+                        soundPool.play(soundId[0],1,1,0,0,1);
 
                     }
                 },5);
@@ -148,6 +156,8 @@ public class MainActivity extends Activity {
                     public void run() {
 
                         relativeLayout.addView(addView);
+                        soundPool.play(soundId[0],1,1,0,0,1);
+
 
                     }
                 },5);
