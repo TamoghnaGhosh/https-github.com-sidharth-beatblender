@@ -20,7 +20,6 @@ import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
 public class MainActivity extends Activity {
-    private TextView textView;
     private int touchCount;
     private float coordinateX, coordinateY;
     private RelativeLayout relativeLayout;
@@ -36,47 +35,10 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         touchCount = 0;
         relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
-        textView = (TextView) findViewById(R.id.TimeDisplay);
         soundId = new int[1];
         soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC,0);
         soundId[0] = soundPool.load(MainActivity.this,R.raw.snare1,1);
 
-//        textView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                ((TextView) view).append("\nTime : "+Long.toString(System.currentTimeMillis())+"Touch Count : "+Integer.toString(touchCount++));
-//                coordinateX = motionEvent.getX();
-//                coordinateY = motionEvent.getY();
-//
-//                final View addView = new View(MainActivity.this);
-//                addView.setBackgroundResource(R.drawable.circle_red);
-//
-//                addView.setLayoutParams(new RelativeLayout.LayoutParams(200,200));
-//                addView.setX(coordinateX - 100);
-//                addView.setY(coordinateY - 100);
-//
-//                new android.os.Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//
-//                        relativeLayout.addView(addView);
-//
-//                    }
-//                },5);
-//
-//                new android.os.Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//
-//                        relativeLayout.removeView(addView);
-//                    }
-//                },150);
-//                return false;
-//            }
-//        });
-        TextView sr1;
-        TextView tv3;
-        TextView tv4;
 
     }
 
@@ -168,7 +130,7 @@ public class MainActivity extends Activity {
 
                         relativeLayout.removeView(addView);
                     }
-                },100);
+                },50);
                 break;
             }
         }
