@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.*;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -31,38 +32,41 @@ public class MainActivity extends Activity {
         touchCount = 0;
         relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
         textView = (TextView) findViewById(R.id.TimeDisplay);
-        textView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                ((TextView) view).append("\nTime : "+Long.toString(System.currentTimeMillis())+"Touch Count : "+Integer.toString(touchCount++));
-                coordinateX = motionEvent.getX();
-                coordinateY = motionEvent.getY();
 
-                final View addView = new View(MainActivity.this);
-                addView.setBackgroundResource(R.drawable.circle_red);
 
-                addView.setLayoutParams(new RelativeLayout.LayoutParams(200,200));
-                addView.setX(coordinateX - 100);
-                addView.setY(coordinateY - 100);
-
-                new android.os.Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        relativeLayout.addView(addView);
-
-                    }
-                },10);
-
-                new android.os.Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        relativeLayout.removeView(addView);
-                    }
-                },200);
-                return false;
-            }
-        });
+//        textView.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                ((TextView) view).append("\nTime : "+Long.toString(System.currentTimeMillis())+"Touch Count : "+Integer.toString(touchCount++));
+//                coordinateX = motionEvent.getX();
+//                coordinateY = motionEvent.getY();
+//
+//                final View addView = new View(MainActivity.this);
+//                addView.setBackgroundResource(R.drawable.circle_red);
+//
+//                addView.setLayoutParams(new RelativeLayout.LayoutParams(200,200));
+//                addView.setX(coordinateX - 100);
+//                addView.setY(coordinateY - 100);
+//
+//                new android.os.Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//
+//                        relativeLayout.addView(addView);
+//
+//                    }
+//                },5);
+//
+//                new android.os.Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//
+//                        relativeLayout.removeView(addView);
+//                    }
+//                },150);
+//                return false;
+//            }
+//        });
         TextView sr1;
         TextView tv3;
         TextView tv4;
@@ -88,6 +92,75 @@ public class MainActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        int action = event.getAction() & MotionEvent.ACTION_MASK;
+        switch (action) {
+            case MotionEvent.ACTION_UP: {
+                coordinateX = event.getX();
+                coordinateY = event.getY();
+                Log.v("X",String.valueOf(coordinateX));
+
+                final View addView = new View(MainActivity.this);
+                addView.setBackgroundResource(R.drawable.circle_red);
+
+                addView.setLayoutParams(new RelativeLayout.LayoutParams(200,200));
+                addView.setX(coordinateX - 100);
+                addView.setY(coordinateY - 100);
+
+                new android.os.Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        relativeLayout.addView(addView);
+
+                    }
+                },5);
+
+                new android.os.Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        relativeLayout.removeView(addView);
+                    }
+                },100);
+                break;
+            }
+
+            case MotionEvent.ACTION_POINTER_UP: {
+                coordinateX = event.getX();
+                coordinateY = event.getY();
+                Log.v("X",String.valueOf(coordinateX));
+
+                final View addView = new View(MainActivity.this);
+                addView.setBackgroundResource(R.drawable.circle_red);
+
+                addView.setLayoutParams(new RelativeLayout.LayoutParams(200,200));
+                addView.setX(coordinateX - 100);
+                addView.setY(coordinateY - 100);
+
+                new android.os.Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        relativeLayout.addView(addView);
+
+                    }
+                },5);
+
+                new android.os.Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        relativeLayout.removeView(addView);
+                    }
+                },100);
+                break;
+            }
+        }
+        return true;
     }
 
 
