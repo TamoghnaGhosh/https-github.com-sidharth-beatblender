@@ -14,9 +14,6 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 
-/**
- * Created by Tanuj on 30-06-2014.
- */
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class TapFragment extends Fragment {
     private float coordinateX, coordinateY;
@@ -102,7 +99,7 @@ public class TapFragment extends Fragment {
                         break;
                     }
                 }
-                return false;
+                return true;
             }
 
 
@@ -111,6 +108,7 @@ public class TapFragment extends Fragment {
         return  view;
 
     }
+
 
 
 }
