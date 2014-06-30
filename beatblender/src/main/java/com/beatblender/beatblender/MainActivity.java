@@ -40,10 +40,10 @@ public class MainActivity extends Activity {
 
                 final View addView = new View(MainActivity.this);
                 addView.setBackgroundResource(R.drawable.circle_red);
-                addView.setX(coordinateX);
-                addView.setY(coordinateY);
-                addView.setLayoutParams(new RelativeLayout.LayoutParams(20,20 ));
 
+                addView.setLayoutParams(new RelativeLayout.LayoutParams(200,200));
+                addView.setX(coordinateX - 100);
+                addView.setY(coordinateY - 100);
 
                 new android.os.Handler().postDelayed(new Runnable() {
                     @Override
@@ -52,14 +52,14 @@ public class MainActivity extends Activity {
                         relativeLayout.addView(addView);
 
                     }
-                },2000);
+                },10);
 
                 new android.os.Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         relativeLayout.removeView(addView);
                     }
-                },2500);
+                },200);
                 return false;
             }
         });
