@@ -29,6 +29,7 @@ public class TapFragment extends Fragment {
         soundPool = new SoundPool(10,AudioManager.STREAM_MUSIC,0);
         soundId = new int[5];
         soundId[0] = soundPool.load(getActivity(),R.raw.snare1,0);
+        relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeLayout);
         view.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent event) {
