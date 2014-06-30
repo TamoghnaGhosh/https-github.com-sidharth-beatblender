@@ -2,6 +2,7 @@ package com.beatblender.beatblender;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,6 +11,8 @@ import android.util.Log;
 import android.view.*;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import junit.framework.Test;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -22,6 +25,7 @@ public class MainActivity extends Activity {
     private float coordinateX, coordinateY;
     private RelativeLayout relativeLayout;
     Timer timer  = new Timer("Highlight after 5");
+    MediaPlayer mp;
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 
@@ -33,40 +37,8 @@ public class MainActivity extends Activity {
         relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
         textView = (TextView) findViewById(R.id.TimeDisplay);
 
+        mp = MediaPlayer.create(this,R.raw.snare1);
 
-//        textView.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                ((TextView) view).append("\nTime : "+Long.toString(System.currentTimeMillis())+"Touch Count : "+Integer.toString(touchCount++));
-//                coordinateX = motionEvent.getX();
-//                coordinateY = motionEvent.getY();
-//
-//                final View addView = new View(MainActivity.this);
-//                addView.setBackgroundResource(R.drawable.circle_red);
-//
-//                addView.setLayoutParams(new RelativeLayout.LayoutParams(200,200));
-//                addView.setX(coordinateX - 100);
-//                addView.setY(coordinateY - 100);
-//
-//                new android.os.Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//
-//                        relativeLayout.addView(addView);
-//
-//                    }
-//                },5);
-//
-//                new android.os.Handler().postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//
-//                        relativeLayout.removeView(addView);
-//                    }
-//                },150);
-//                return false;
-//            }
-//        });
         TextView sr1;
         TextView tv3;
         TextView tv4;
@@ -148,6 +120,7 @@ public class MainActivity extends Activity {
                     public void run() {
 
                         relativeLayout.addView(addView);
+                        mp.start();
 
                     }
                 },5);
