@@ -20,11 +20,9 @@ import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
 public class MainActivity extends Activity {
+    private TextView textView;
     private int touchCount;
-    private float coordinateX, coordinateY;
-    private RelativeLayout relativeLayout;
-    private SoundPool soundPool;
-    private int soundId[];
+
     Timer timer  = new Timer("Highlight after 5");
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -33,11 +31,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        touchCount = 0;
-        relativeLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
-        soundId = new int[1];
-        soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC,0);
-        soundId[0] = soundPool.load(MainActivity.this,R.raw.snare1,1);
+        getFragmentManager().beginTransaction().add(R.id.fragmentSpace, new TapFragment()).commit();
+
 
 
     }
@@ -63,79 +58,7 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        int p_index;
-        int action = event.getAction() & MotionEvent.ACTION_MASK;
-        switch (action) {
-            case MotionEvent.ACTION_DOWN: {
-                coordinateX = event.getX();
-                coordinateY = event.getY();
-                Log.v("X",String.valueOf(coordinateX));
 
-                final View addView = new View(MainActivity.this);
-                addView.setBackgroundResource(R.drawable.circle_red);
-
-                addView.setLayoutParams(new RelativeLayout.LayoutParams(200,200));
-                addView.setX(coordinateX - 100);
-                addView.setY(coordinateY - 100);
-
-                new android.os.Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        relativeLayout.addView(addView);
-                        soundPool.play(soundId[0],1,1,0,0,1);
-
-                    }
-                },5);
-
-                new android.os.Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        relativeLayout.removeView(addView);
-                    }
-                },100);
-                break;
-            }
-
-            case MotionEvent.ACTION_POINTER_DOWN: {
-                p_index = event.getActionIndex();
-                coordinateX = event.getX(p_index);
-                coordinateY = event.getY(p_index);
-                Log.v("X",String.valueOf(coordinateX));
-
-                final View addView = new View(MainActivity.this);
-                addView.setBackgroundResource(R.drawable.circle_red);
-
-                addView.setLayoutParams(new RelativeLayout.LayoutParams(200,200));
-                addView.setX(coordinateX - 100);
-                addView.setY(coordinateY - 100);
-
-                new android.os.Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        relativeLayout.addView(addView);
-                        soundPool.play(soundId[0],1,1,0,0,1);
-
-
-                    }
-                },5);
-
-                new android.os.Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        relativeLayout.removeView(addView);
-                    }
-                },50);
-                break;
-            }
-        }
-        return false;
-    }
 
 
 }
