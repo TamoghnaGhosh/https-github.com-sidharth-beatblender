@@ -96,9 +96,10 @@ public class MainActivity extends Activity {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        int p_index;
         int action = event.getAction() & MotionEvent.ACTION_MASK;
         switch (action) {
-            case MotionEvent.ACTION_UP: {
+            case MotionEvent.ACTION_DOWN: {
                 coordinateX = event.getX();
                 coordinateY = event.getY();
                 Log.v("X",String.valueOf(coordinateX));
@@ -129,9 +130,10 @@ public class MainActivity extends Activity {
                 break;
             }
 
-            case MotionEvent.ACTION_POINTER_UP: {
-                coordinateX = event.getX();
-                coordinateY = event.getY();
+            case MotionEvent.ACTION_POINTER_DOWN: {
+                p_index = event.getActionIndex();
+                coordinateX = event.getX(p_index);
+                coordinateY = event.getY(p_index);
                 Log.v("X",String.valueOf(coordinateX));
 
                 final View addView = new View(MainActivity.this);
